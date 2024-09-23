@@ -19,8 +19,51 @@ namespace CAD2024
         public static void ArrayTesting()
         {
             //Question 4
+           /** 
             Rectangle rectangle1 = GetUserRectangle();
             Console.WriteLine(rectangle1.ToString());
+
+            Circle circle1 = GetUserCircle();
+            Console.WriteLine(circle1.ToString());
+           */
+
+            Rectangle[] myRectangles = new Rectangle[3];
+            for (int i = 0; i < 3; i++)
+            {
+                Rectangle rectangle = GetUserRectangle();
+                myRectangles[i] = rectangle;
+            }
+
+            foreach (Rectangle rectangle in myRectangles)
+            {
+                Console.WriteLine(rectangle.ToString());
+            }
+
+            foreach (Rectangle rectangle in myRectangles)
+            {
+                Console.WriteLine(rectangle.Width);
+            }
+
+            foreach (Rectangle rectangle in myRectangles)
+            {
+                Console.WriteLine("Shrinking each rectangle by 2");
+                //I'm only decreasing the width by 2, not 20 (question 4.g)
+                rectangle.Shrink(2);
+                Console.WriteLine(rectangle.ToString());
+            }
+            double combinedArea = GetTotalArea(myRectangles);
+            Console.WriteLine($"Total area of all rectangles is: {combinedArea}");
+
+        }
+
+        public static double GetTotalArea(Rectangle[] rectangleArray)
+        {
+            double totalArea = 0;   
+            foreach(Rectangle rectangle in rectangleArray)
+            {
+                totalArea += rectangle.CalcArea();
+            }
+            return totalArea;
         }
 
         public static Rectangle GetUserRectangle()
@@ -37,6 +80,18 @@ namespace CAD2024
 
             Rectangle rectangle = new Rectangle(length, width, x, y);
             return rectangle;
+        }
+
+        public static Circle GetUserCircle()
+        {
+            Console.WriteLine("Enter circle radius: ");
+            double radius = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Enter circle x position:");
+            int x = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter circle y position:");
+            int y = Convert.ToInt32(Console.ReadLine());
+            Circle circle = new Circle(radius, x, y);
+            return circle;
         }
 
         public static void InitialTesting()
