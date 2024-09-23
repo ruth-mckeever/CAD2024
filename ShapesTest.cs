@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,6 +12,37 @@ namespace CAD2024
     {
         static void Main(string[] args)
         {
+            //InitialTesting(); // Note: calling a method that has no return type...
+            ArrayTesting();
+        }
+
+        public static void ArrayTesting()
+        {
+            //Question 4
+            Rectangle rectangle1 = GetUserRectangle();
+            Console.WriteLine(rectangle1.ToString());
+        }
+
+        public static Rectangle GetUserRectangle()
+        {
+            
+            Console.WriteLine("Enter rectangle width:");
+            double width = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Enter rectangle length:");
+            double length = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Enter rectangle x position:");
+            int x = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter rectangle y position:");
+            int y = Convert.ToInt32(Console.ReadLine());
+
+            Rectangle rectangle = new Rectangle(length, width, x, y);
+            return rectangle;
+        }
+
+        public static void InitialTesting()
+        {
+            //I want to keep these tests but not necessarily see them every time I run the program
+            // so I'm moving them out into a method of their own.
             Rectangle rectangle1 = new Rectangle();
             rectangle1.Length = 10;
             rectangle1.Width = 15;
@@ -45,9 +78,26 @@ namespace CAD2024
 
             Circle circle = new Circle(2, 3, 5);
             Console.WriteLine(circle.ToString());
-         
+
             Console.WriteLine($"Area of circle: {circle.GetArea()}");
 
+            //Check circle is at location, and move to methods
+            bool isThere = circle.IsAtLocation(1, 1);       // Calling a method that has a return type - set it equal to something
+            Console.WriteLine($"Circle is at location 2, 2: {isThere}");
+            circle.MoveTo(2, 2);
+            isThere = circle.IsAtLocation(2, 2);
+            Console.WriteLine(circle.ToString());
+            Console.WriteLine($"Circle is at location 2, 2: {isThere}");
+
+            Circle circle2 = new Circle(5, 2, 2);
+            if (circle2.IsAtLocation(circle.XPosition, circle.YPosition))
+            {
+                Console.WriteLine("Both circles at same position");
+            }
+            else
+            {
+                Console.WriteLine("Both circles are at different positions");
+            }
         }
     }
 }

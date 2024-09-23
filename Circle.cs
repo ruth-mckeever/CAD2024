@@ -6,26 +6,12 @@ using System.Threading.Tasks;
 
 namespace CAD2024
 {
-    public class Circle
+    public class Circle : Shape
     {
         //Fields/variables
-        private int xPosition;
-        private int yPosition;
         private double radius;
 
         //Properties
-        public int XPosition
-        {
-            get { return xPosition; }
-            set { xPosition = value; }
-        }
-
-        public int YPosition
-        {
-            get { return yPosition; }
-            set { yPosition = value; }
-        }
-
         public double Radius
         {
             get { return radius; }
@@ -36,8 +22,6 @@ namespace CAD2024
         public Circle()
         {
             radius = 1D;
-            XPosition = 0;
-            YPosition = 0;
         }
 
         public Circle(double radius, int x, int y)
@@ -53,19 +37,10 @@ namespace CAD2024
             return Math.PI * radius * radius;
         }
 
-        public bool IsAtLocation(int x, int y)
-        {
-            if (this.xPosition == x && this.yPosition == y)
-            {
-                return true;
-            }
-            return false;
-        }
-
         //Overrride Methods
         public override string ToString()
         {
-            return $"Circle - radius: {radius}, at x: {XPosition}, y: {YPosition}";
+            return $"Circle - radius: {radius}, {base.ToString()}";
         }
     }
 }

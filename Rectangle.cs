@@ -3,29 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace CAD2024
 {
-    public class Rectangle
+    public class Rectangle : Shape
     {
         //Fields
-        private int xPosition;
-        private int yPosition;
         private double length;
         private double width;
-
-        //Properties
-        public int XPosition
-        {
-            get { return xPosition; }
-            set { xPosition = value; }
-        }
-
-        public int YPosition
-        {
-            get { return yPosition; }
-            set { yPosition = value; }
-        }
 
         public double Length
         {
@@ -42,23 +28,19 @@ namespace CAD2024
         //Constructors
         public Rectangle()
         {
-            this.xPosition = 0;
-            this.yPosition = 0;
-            this.length = 0;
-            this.width = 0;
+            length = 0;
+            width = 0;
         }
 
         public Rectangle(double length, double width)
         {
-            this.xPosition = 0;
-            this.yPosition = 0;
             this.length = length;
             this.width = width;
         }
         public Rectangle(double length, double width, int xPosition, int yPosition)
         {
-            this.xPosition = xPosition;
-            this.yPosition = yPosition;
+            XPosition = xPosition;
+            YPosition = yPosition;
             this.length = length;
             this.width = width;
         }
@@ -69,34 +51,48 @@ namespace CAD2024
             return Length * Width;
         }
 
-        public void MoveTo(int newXPosition, int newYposition)
-        {
-            this.XPosition = newXPosition;
-            this.YPosition = newYposition;
-        }
-
         public void Grow()
         {
-            Length++;
-            Width++;
+            this.Grow(1.0);
+            //Length++;
+            //Width++;
+        }
+        public void Grow(double growValue)
+        {
+            length = length + growValue;
+            width += growValue;             // += does the same thing as width = with + growValue
         }
 
         public void Shrink()
         {
-            if (Length >= 1)
+            this.Shrink(1.0);
+            /*if (length >= 1)
             {
-                Length--;
+                length--;
             }
-            if (Width >= 1)
+            if (width >= 1)
             {
-                Width--;
+                width--;
+            }
+            */
+        }
+
+        public void Shrink(double shrinkValue)
+        {
+            if (length >= shrinkValue)
+            {
+                length = length - shrinkValue;
+            }
+            if (width >= shrinkValue)
+            {
+                width -= shrinkValue;       // -= does the same as width = width - shrinkValue
             }
         }
 
         //Override methods
         public override string ToString()
         {
-            return $"Rectangle - Width: {Width}, Length: {Length}, at x: {XPosition}, y: {YPosition}";
+            return $"Rectangle - Width: {Width}, Length: {Length}, {base.ToString()}";
         }
 
     }
